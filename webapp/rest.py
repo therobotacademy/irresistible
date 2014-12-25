@@ -56,7 +56,7 @@ class ToppingAPI(Resource):
         topping = filter(lambda t: t['id'] == id, toppings)
         if len(topping) == 0:
             abort(404)
-        return { 'toppings': marshal(topping[0], topping_fields) }
+        return { 'topping': marshal(topping[0], topping_fields) }
         
     def put(self, id):
         topping = filter(lambda t: t['id'] == id, toppings)
@@ -84,4 +84,4 @@ api.add_resource(ToppingListAPI, '/api/v1.0/toppings', endpoint = 'toppings')
 api.add_resource(ToppingAPI, '/api/v1.0/toppings/<int:id>', endpoint = 'topping')
     
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(host='0.0.0.0', debug = True)

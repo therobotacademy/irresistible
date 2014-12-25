@@ -16,7 +16,6 @@ angular.module('toppingApp.controllers',[]).controller('ToppingListController',f
     }
 
 }).controller('ToppingViewController',function($scope,$stateParams,Topping){
-
     $scope.topping=Topping.get({id:$stateParams.id});
 
 }).controller('ToppingCreateController',function($scope,$state,$stateParams,Topping){
@@ -24,7 +23,7 @@ angular.module('toppingApp.controllers',[]).controller('ToppingListController',f
     $scope.topping=new Topping();
 
     $scope.addTopping=function(){
-        $scope.topping.$save(function(){
+        $scope.toppings.$save(function(){
             $state.go('toppings');
         });
     }
@@ -33,7 +32,7 @@ angular.module('toppingApp.controllers',[]).controller('ToppingListController',f
 
     $scope.updateTopping=function(){
         $scope.topping.$update(function(){
-            $state.go('toppings');
+            $state.go('topping');
         });
     };
 
