@@ -89,4 +89,4 @@ api.add_resource(ToppingListAPI, '/api/v1.0/toppings', endpoint = 'toppings')
 api.add_resource(ToppingAPI, '/api/v1.0/toppings/<int:id>', endpoint = 'topping')
     
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug = True)
+    app.run(host='0.0.0.0', port = 5000, debug = True)
