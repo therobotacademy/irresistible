@@ -10,11 +10,15 @@ from flask.ext.cors import CORS
  
 app = Flask(__name__, static_url_path = "")
 
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}},
-            headers="Content-Type")
-
 api = Api(app)
- 
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,Accept')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
+
 toppings = [
     {
         'id': 1,
