@@ -2,21 +2,21 @@
     "swagger": "2.0",
     "info": {
         "title": "PizzaToppings API",
-        "version": "1.0.0"
+        "version": "1.0.1"
     },
     "host": "api.irresistibleapis.com",
-	"basepath": "/v1",
-	"schemes": [
-	    "http"
-	],
+    "basePath": "/v1",
+    "schemes": [
+        "http"
+    ],
     "consumes": [
         "application/json"
     ],
-	"produces": [
-	    "application/json"
-	],
-	"paths": {
-        "pizzas/": {
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/pizzas": {
             "get": {
                 "description": "Retrieves a list of pizzas in the system",
                 "parameters": [
@@ -51,22 +51,13 @@
                             ]
                         },
                         "schema": {
-                            "type": "array"
+                            "type": "array",
+                            "items": "object"
                         }
                     }
                 }
             },
             "post": {
-                "409": {
-                    "description": "Duplicate pizza name or ID found",
-                    "examples": {
-                        "application/json": [
-                            {
-                                "message": "Duplicate pizza ID found"
-                            }
-                        ]
-                    }
-                },
                 "description": "Adds a new pizza to the list",
                 "parameters": [
                     {
@@ -74,14 +65,14 @@
                         "in": "body",
                         "name": "id",
                         "required": true,
-                        "type": "integer"
+                        "type": "string"
                     },
                     {
                         "description": "Name for the pizza",
                         "in": "body",
                         "name": "name",
                         "required": true,
-                        "type": "integer"
+                        "type": "string"
                     },
                     {
                         "description": "Toppings on the pizza",
@@ -107,11 +98,21 @@
                                 }
                             ]
                         }
+                    },
+                    "409": {
+                        "description": "Duplicate pizza name or ID found",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "message": "Duplicate pizza ID found"
+                                }
+                            ]
+                        }
                     }
                 }
             }
         },
-        "pizzas/{pizzaid}": {
+        "/pizzas/{pizzaid}": {
             "get": {
                 "description": "Retrieves an individual pizza",
                 "responses": {
@@ -183,7 +184,7 @@
                 }
             }
         },
-        "toppings/": {
+        "/toppings/": {
             "get": {
                 "description": "Retrieves a list of pizzas in the system",
                 "parameters": [
@@ -218,22 +219,13 @@
                             ]
                         },
                         "schema": {
-                            "type": "array"
+                            "type": "array",
+                            "items": null
                         }
                     }
                 }
             },
             "post": {
-                "409": {
-                    "description": "Duplicate pizza name or ID found",
-                    "examples": {
-                        "application/json": [
-                            {
-                                "message": "Duplicate pizza ID found"
-                            }
-                        ]
-                    }
-                },
                 "description": "Adds a new pizza to the list",
                 "parameters": [
                     {
@@ -241,14 +233,14 @@
                         "in": "body",
                         "name": "id",
                         "required": true,
-                        "type": "integer"
+                        "type": "string"
                     },
                     {
                         "description": "Name for the pizza",
                         "in": "body",
                         "name": "name",
                         "required": true,
-                        "type": "integer"
+                        "type": "string"
                     },
                     {
                         "description": "Toppings on the pizza",
@@ -274,12 +266,21 @@
                                 }
                             ]
                         }
+                    },
+                    "409": {
+                        "description": "Duplicate pizza name or ID found",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "message": "Duplicate pizza ID found"
+                                }
+                            ]
+                        }
                     }
                 }
             }
         },
-        "toppings/{toppingid}": {
-            
+        "/toppings/{toppingid}": {
             "get": {
                 "description": "Retrieves an individual pizza",
                 "responses": {
@@ -353,4 +354,3 @@
         }
     }
 }
-
