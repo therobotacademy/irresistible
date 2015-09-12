@@ -36,17 +36,21 @@ paths:
       responses:
         '200':
           description: Pizza list
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                toppings:
+                  type: array
+                  items:
+                    type: integer
           examples:
-            application/json:
-              - id: 1
-                name: "Maui Wowie"
-                toppings:
-                  - 2
-                  - 3
-              - id: 2
-                name: "Kirsten's Pizza"
-                toppings:
-                  - 1
+            application/json: [{"id":1,"name":"Maui Wowie","toppings":[2,3]},{"id":2,"name":"Kirsten's Pizza","toppings":[1]}]
     post:
       description: Adds a new pizza to the list
       parameters:
@@ -71,44 +75,72 @@ paths:
       responses:
         '201':
           description: Pizza created
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              toppings:
+                type: array
+                items:
+                  type: integer
+              location:
+                type: string
           examples:
-            application/json:
-              - id: 1
-                location: /pizzas/1.2.3.4
-                name: Maui Wowie
-                toppings:
-                  - 2
-                  - 3
+            application/json: {"id":1,"location":"/pizzas/1.2.3.4","name":"Maui Wowie","toppings":[2,3]}
         '409':
           description: Duplicate pizza name or ID found
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
           examples:
-            application/json:
-              - message: Duplicate pizza ID found
+            application/json: { message: Duplicate pizza ID found }
   /pizzas/{pizzaid}:
     get:
       description: Retrieves an individual pizza
+      parameters:
+        - description: ID for the pizza
+          in: path
+          name: pizzaid
+          required: true
+          type: string
       responses:
         '200':
           description: 'Pizza '
           examples:
-            application/json:
-              id: 1
-              name: Maui Wowie
-              toppings:
-                - 2
-                - 3
+            application/json: {"id":1,"name":"Maui Wowie","toppings":[2,3]}
           schema:
             type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              toppings:
+                type: array
+                items:
+                  type: integer
         '404':
           description: Pizza not found
           examples:
-            application/json:
-              message: No pizza with that ID found
+            application/json: { message: No pizza with that ID found }
             schema:
-              type: string
+              type: object
+              properties:
+                message:
+                  type: string
     put:
       description: Pizza update
       parameters:
+        - description: ID for the pizza
+          in: path
+          name: pizzaid
+          required: true
+          type: string
         - description: ID for the pizza (only one per user)
           in: body
           name: pizza
@@ -139,6 +171,12 @@ paths:
               type: string
     delete:
       description: Deletes an individual pizza
+      parameters:
+        - description: ID for the pizza
+          in: path
+          name: pizzaid
+          required: true
+          type: string
       responses:
         '204':
           description: Pizza deleted
@@ -147,6 +185,8 @@ paths:
           examples:
             application/json:
               message: No pizza with that ID found
+            schema:
+              type: string
   /toppings/:
     get:
       description: Retrieves a list of toppings in the system
@@ -158,21 +198,25 @@ paths:
           type: string
       responses:
         '200':
-          description: Pizza list
+          description: Topping list
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
           examples:
-            application/json:
-              - id: 1
-                name: "pepperoni"
-              - id: 2
-                name: "ham"
-              - id: 3
-                name: "pineapple"
+            application/json: [{"id":"1","name":"pepperoni"},{"id":"2","name":"ham"},{"id":"3","name":"pineapple"}]
+
     post:
       description: Adds a new topping to the list
       parameters:
         - description: ID for the topping (only one per user)
           in: body
-          name: pizza
+          name: topping
           required: true
           schema:
               type: object
@@ -183,64 +227,94 @@ paths:
                     type: string
       responses:
         '201':
-          description: Pizza created
+          description: Topping created
           examples:
             application/json:
-              - id: 1
-                location: /pizzas/1.2.3.4
-                name: Maui Wowie
-                toppings:
-                  - 2
-                  - 3
+              - id: "1"
+                location: /toppings/1
+                name: Pepperoni
 
         '409':
-          description: Duplicate pizza name or ID found
+          description: Duplicate topping name
           examples:
             application/json:
-              - message: Duplicate pizza ID found
+              - message: Duplicate topping name found
   /toppings/{toppingid}:
     get:
-      description: Retrieves an individual pizza
+      description: Retrieves an individual topping
+      parameters:
+        - description: Topping ID
+          in: path
+          name: toppingid
+          required: true
+          type: string
       responses:
         '200':
-          description: 'Pizza '
+          description: 'Topping'
           examples:
-            application/json:
-              id: 1
-              name: Maui Wowie
-              toppings:
-                - 2
-                - 3
+            application/json: {"id":"1","name":"Pepperoni"}
           schema:
             type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
         '404':
-          description: Pizza not found
-          examples:
-            application/json:
-              message: No pizza with that ID found
-            schema:
-              type: string
+          description: Topping not found
+          application/json: { message: No topping with that ID found }
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
     put:
-      description: Updates an individual pizza
+      description: Updates an individual topping
+      parameters:
+        - description: ID for the topping
+          in: path
+          name: toppingid
+          required: true
+          type: string
+        - description: Topping to update
+          in: body
+          name: topping
+          required: true
+          schema:
+              type: object
+              required:
+                - id
+                - name
+              properties:
+                id:
+                    type: string
+                name:
+                    type: string
+
       responses:
         '204':
-          description: Pizza updated
+          description: Topping updated
         '404':
-          description: Pizza not found
+          description: Topping not found
           examples:
-            application/json:
-              message: No pizza with that ID found
-            schema:
-              type: string
-    delete:
-      description: Deletes an individual pizza
-      responses:
-        '204':
-          description: Pizza deleted
-        '404':
-          description: Pizza not found
-          examples:
-            application/json:
-              message: No pizza with that ID found
+            application/json: { message: No topping with that ID found }
             schema:
               type: object
+              properties:
+                message:
+                  type: string
+    delete:
+      description: Deletes an individual topping
+      responses:
+        '204':
+          description: Topping deleted
+        '404':
+          description: Topping not found
+          examples:
+            application/json: { message: No topping with that ID found }
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+
