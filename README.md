@@ -7,7 +7,7 @@ here:
 
 http://www.princesspolymath.com/princess_polymath/?p=768
 
-The system includes a basic flask-based REST API as well
+The system includes a basic node-based REST API as well
 as a front-end application running on that API.
 
 ## License
