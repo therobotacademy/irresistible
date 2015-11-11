@@ -1,0 +1,15 @@
+{
+  "name": "",
+  "version": "1.0.1",
+  "description": "This is a sample server Petstore server.\n\n\n[Learn about Swagger](http://swagger.io) or join the IRC channel `#swagger` on irc.freenode.net.\n\n\nFor this sample, you can use the api key `special-key` to test the authorization filters",
+  "main": "index.js",
+  "keywords": [
+    "swagger"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "swagger-tools": "0.8.*"
+  }
+}

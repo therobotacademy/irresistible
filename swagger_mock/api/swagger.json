@@ -1,0 +1,532 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PizzaToppings API",
+    "description": "This is a sample server Petstore server.\n\n\n[Learn about Swagger](http://swagger.io) or join the IRC channel `#swagger` on irc.freenode.net.\n\n\nFor this sample, you can use the api key `special-key` to test the authorization filters",
+    "version": "1.0.0"
+  },
+  "produces": ["application/json"],
+  "host": "localhost:8080",
+  "basePath": "/v1",
+  "paths": {
+  
+  "/toppings/": {
+    
+    "get": {
+      "summary": "",
+      "description":"Retrieves a list of toppings in the system",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "toppingsGet",
+      "parameters": [
+        {
+  "name" : "nameString",
+  "in" : "query",
+  "description" : "String to match in the topping name",
+  "required" : false,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "Topping list",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "examples" : {
+    "application/json" : [ {
+      "id" : "1",
+      "name" : "pepperoni"
+    }, {
+      "id" : "2",
+      "name" : "ham"
+    }, {
+      "id" : "3",
+      "name" : "pineapple"
+    } ]
+  }
+}
+        
+        
+      }
+    } ,
+    
+    "post": {
+      "summary": "",
+      "description":"Adds a new topping to the list",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "toppingsPost",
+      "parameters": [
+        {
+  "in" : "body",
+  "name" : "topping",
+  "description" : "ID for the topping (only one per user)",
+  "required" : true,
+  "schema" : {
+    "type" : "object",
+    "required" : [ "name" ],
+    "properties" : {
+      "name" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        
+      ],
+      "responses": {
+        "201": {
+  "description" : "Topping created",
+  "examples" : {
+    "application/json" : [ {
+      "id" : "1",
+      "location" : "/toppings/1",
+      "name" : "Pepperoni"
+    } ]
+  }
+}
+        ,
+        "409": {
+  "description" : "Duplicate topping name",
+  "examples" : {
+    "application/json" : [ {
+      "message" : "Duplicate topping name found"
+    } ]
+  }
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/pizzas/{pizzaid}": {
+    
+    "get": {
+      "summary": "",
+      "description":"Retrieves an individual pizza",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "pizzasPizzaidGet",
+      "parameters": [
+        {
+  "name" : "pizzaid",
+  "in" : "path",
+  "description" : "ID for the pizza",
+  "required" : true,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "Pizza ",
+  "schema" : {
+    "type" : "object",
+    "properties" : {
+      "name" : {
+        "type" : "string"
+      },
+      "toppings" : {
+        "type" : "array",
+        "items" : {
+          "type" : "integer"
+        }
+      },
+      "id" : {
+        "type" : "string"
+      }
+    }
+  },
+  "examples" : {
+    "application/json" : {
+      "id" : 1,
+      "name" : "Maui Wowie",
+      "toppings" : [ 2, 3 ]
+    }
+  }
+}
+        ,
+        "404": {
+  "description" : "Pizza not found"
+}
+        
+        
+      }
+    } ,
+    
+    "put": {
+      "summary": "",
+      "description":"Pizza update",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "pizzasPizzaidPut",
+      "parameters": [
+        {
+  "name" : "pizzaid",
+  "in" : "path",
+  "description" : "ID for the pizza",
+  "required" : true,
+  "type" : "string"
+},
+        {
+  "in" : "body",
+  "name" : "pizza",
+  "description" : "ID for the pizza (only one per user)",
+  "required" : true,
+  "schema" : {
+    "type" : "object",
+    "required" : [ "id", "name" ],
+    "properties" : {
+      "id" : {
+        "type" : "string"
+      },
+      "name" : {
+        "type" : "string"
+      },
+      "toppings" : {
+        "type" : "array",
+        "items" : {
+          "type" : "integer"
+        }
+      }
+    }
+  }
+}
+        
+      ],
+      "responses": {
+        "204": {
+  "description" : "Pizza updated"
+}
+        ,
+        "404": {
+  "description" : "Pizza not found"
+}
+        
+        
+      }
+    } ,
+    
+    "delete": {
+      "summary": "",
+      "description":"Deletes an individual pizza",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "pizzasPizzaidDelete",
+      "parameters": [
+        {
+  "name" : "pizzaid",
+  "in" : "path",
+  "description" : "ID for the pizza",
+  "required" : true,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "204": {
+  "description" : "Pizza deleted"
+}
+        ,
+        "404": {
+  "description" : "Pizza not found"
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/pizzas": {
+    
+    "get": {
+      "summary": "",
+      "description":"Retrieves a list of pizzas in the system",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "pizzasGet",
+      "parameters": [
+        {
+  "name" : "nameString",
+  "in" : "query",
+  "description" : "String to match in the pizza name",
+  "required" : false,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "Pizza list",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "toppings" : {
+          "type" : "array",
+          "items" : {
+            "type" : "integer"
+          }
+        },
+        "id" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "examples" : {
+    "application/json" : [ {
+      "id" : 1,
+      "name" : "Maui Wowie",
+      "toppings" : [ 2, 3 ]
+    }, {
+      "id" : 2,
+      "name" : "Kirsten's Pizza",
+      "toppings" : [ 1 ]
+    } ]
+  }
+}
+        
+        
+      }
+    } ,
+    
+    "post": {
+      "summary": "",
+      "description":"Adds a new pizza to the list",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "pizzasPost",
+      "parameters": [
+        {
+  "in" : "body",
+  "name" : "pizza",
+  "description" : "ID for the pizza (only one per user)",
+  "required" : true,
+  "schema" : {
+    "type" : "object",
+    "required" : [ "id", "name" ],
+    "properties" : {
+      "id" : {
+        "type" : "string"
+      },
+      "name" : {
+        "type" : "string"
+      },
+      "toppings" : {
+        "type" : "array",
+        "items" : {
+          "type" : "integer"
+        }
+      }
+    }
+  }
+}
+        
+      ],
+      "responses": {
+        "201": {
+  "description" : "Pizza created",
+  "schema" : {
+    "type" : "object",
+    "properties" : {
+      "name" : {
+        "type" : "string"
+      },
+      "toppings" : {
+        "type" : "array",
+        "items" : {
+          "type" : "integer"
+        }
+      },
+      "location" : {
+        "type" : "string"
+      },
+      "id" : {
+        "type" : "string"
+      }
+    }
+  },
+  "examples" : {
+    "application/json" : {
+      "id" : 1,
+      "location" : "/pizzas/1.2.3.4",
+      "name" : "Maui Wowie",
+      "toppings" : [ 2, 3 ]
+    }
+  }
+}
+        ,
+        "409": {
+  "description" : "Duplicate pizza name or ID found",
+  "schema" : {
+    "type" : "object",
+    "properties" : {
+      "message" : {
+        "type" : "string"
+      }
+    }
+  },
+  "examples" : {
+    "application/json" : {
+      "message" : "Duplicate pizza ID found"
+    }
+  }
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/toppings/{toppingid}": {
+    
+    "get": {
+      "summary": "",
+      "description":"Retrieves an individual topping",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "toppingsToppingidGet",
+      "parameters": [
+        {
+  "name" : "toppingid",
+  "in" : "path",
+  "description" : "Topping ID",
+  "required" : true,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "Topping",
+  "schema" : {
+    "type" : "object",
+    "properties" : {
+      "name" : {
+        "type" : "string"
+      },
+      "id" : {
+        "type" : "string"
+      }
+    }
+  },
+  "examples" : {
+    "application/json" : {
+      "id" : "1",
+      "name" : "Pepperoni"
+    }
+  }
+}
+        ,
+        "404": {
+  "description" : "Topping not found"
+}
+        
+        
+      }
+    } ,
+    
+    "put": {
+      "summary": "",
+      "description":"Updates an individual topping",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "toppingsToppingidPut",
+      "parameters": [
+        {
+  "name" : "toppingid",
+  "in" : "path",
+  "description" : "ID for the topping",
+  "required" : true,
+  "type" : "string"
+},
+        {
+  "in" : "body",
+  "name" : "topping",
+  "description" : "Topping to update",
+  "required" : true,
+  "schema" : {
+    "type" : "object",
+    "required" : [ "id", "name" ],
+    "properties" : {
+      "id" : {
+        "type" : "string"
+      },
+      "name" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        
+      ],
+      "responses": {
+        "204": {
+  "description" : "Topping updated"
+}
+        ,
+        "404": {
+  "description" : "Topping not found"
+}
+        
+        
+      }
+    } ,
+    
+    "delete": {
+      "summary": "",
+      "description":"Deletes an individual topping",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "toppingsToppingidDelete",
+      "parameters": [
+        {
+  "name" : "toppingid",
+  "in" : "path",
+  "description" : "ID for the topping",
+  "required" : true,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "204": {
+  "description" : "Topping deleted"
+}
+        ,
+        "404": {
+  "description" : "Topping not found"
+}
+        
+        
+      }
+    } 
+    
+  } 
+  
+  }, "definitions": {
+  
+  }
+}
