@@ -9,7 +9,7 @@ info:
 host: api.irresistibleapis.com
 
 # the basepath, which is appended to the host
-basePath: /v1
+basePath: /api/v1.0
 
 # the schemes (http | https) to call with
 schemes:
