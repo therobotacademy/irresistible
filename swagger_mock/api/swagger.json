@@ -6,8 +6,8 @@
     "version": "1.0.0"
   },
   "produces": ["application/json"],
-  "host": "localhost:8080",
-  "basePath": "/v1",
+  "host": "irresistibleapis:8080",
+  "basePath": "/api/v1.0/",
   "paths": {
   
   "/toppings/": {
