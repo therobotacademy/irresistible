@@ -3,7 +3,7 @@
 var app = require('connect')();
 var http = require('http');
 var swaggerTools = require('swagger-tools');
-
+var serveStatic = require('serve-static');
 var serverPort = 8080;
 
 // swaggerRouter configuration
@@ -12,6 +12,8 @@ var options = {
   controllers: './controllers',
   useStubs: process.env.NODE_ENV === 'development' ? true : false // Conditionally turn on stubs (mock mode)
 };
+
+app.use(serveStatic("."));
 
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
 var swaggerDoc = require('./api/swagger.json');
