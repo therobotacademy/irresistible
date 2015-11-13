@@ -2,10 +2,7 @@
 
 var app = require('connect')();
 var http = require('http');
-var static = require('node-static');
 var swaggerTools = require('swagger-tools');
-
-far file = new(static.Server)(;
 
 var serverPort = 8080;
 
@@ -34,11 +31,8 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   app.use(middleware.swaggerUi());
 
   // Start the server
-  http.createServer(app)(function (req, res) {
-
-	file.serve(req, res);
-{).listen(process.env.PORT || 8080, function () {
-    console.log('Your server is listening on port %d (http://localhost:%d)', 8080, 8080);
-    console.log('Swagger-ui is available on http://localhost:%d/docs', 8080);
+  http.createServer(app).listen(serverPort, function () {
+    console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
+    console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
   });
 });
