@@ -11,14 +11,14 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 app.use(express.bodyParser());
 
-app.get('/v1/toppings', function(req, res) {
+app.get('/api/v1.0/toppings', function(req, res) {
   for (index=0;index<toppings.toppings.length; index++) {
 	toppings.toppings[index]["id"] = index + 1;
   }
   res.json(toppings);
 });
 
-app.get('/v1/toppings/:id', function(req, res) {
+app.get('/api/v1.0/toppings/:id', function(req, res) {
   if(toppings.toppings.length <= req.params.id-1 || req.params.id < 0) {
     res.statusCode = 404;
     return res.send('Error 404: No topping found');
@@ -28,7 +28,7 @@ app.get('/v1/toppings/:id', function(req, res) {
   res.json({topping : t});
 });
 
-app.put('/v1/toppings/:id', function(req, res) {
+app.put('/api/v1.0/toppings/:id', function(req, res) {
   if(!req.body.hasOwnProperty('title')) {
     res.statusCode = 400;
     return res.send('Error 400: Post syntax incorrect.');
@@ -42,7 +42,7 @@ app.put('/v1/toppings/:id', function(req, res) {
   res.json(true);
 });
 
-app.post('/v1/toppings', function(req, res) {
+app.post('/api/v1.0/toppings', function(req, res) {
   if(!req.body.hasOwnProperty('title')) {
     res.statusCode = 400;
     return res.send('Error 400: Post syntax incorrect.');
@@ -56,7 +56,7 @@ app.post('/v1/toppings', function(req, res) {
   res.json(true);
 });
 
-app.delete('/v1/toppings/:id', function(req, res) {
+app.delete('/api/v1.0/toppings/:id', function(req, res) {
   if(toppings.toppings.length <= req.params.id-1) {
     res.statusCode = 404;
     return res.send('Error 404: No quote found');
