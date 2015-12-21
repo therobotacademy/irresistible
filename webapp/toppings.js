@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var bodyParser = require('body-parser');
 
 var toppings = { "toppings" : [
   { title : "pepperoni"},
@@ -9,7 +10,6 @@ var toppings = { "toppings" : [
 
 app.use(express.static(path.join(__dirname, 'static')));
 
-app.use(express.bodyParser());
 
 app.get('/api/v1.0/toppings', function(req, res) {
   for (index=0;index<toppings.toppings.length; index++) {
