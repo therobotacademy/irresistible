@@ -9,7 +9,7 @@ var toppings = { "toppings" : [
   { title : "pickles"} ]};
 
 app.use(express.static(path.join(__dirname, 'static')));
-
+app.use(bodyParser.json());
 
 app.get('/api/v1.0/toppings', function(req, res) {
   for (index=0;index<toppings.toppings.length; index++) {
