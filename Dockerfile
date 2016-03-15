@@ -11,4 +11,4 @@ RUN npm install -g express@2.5.1
 RUN npm install express
 RUN npm install
 
-CMD ["node", "toppings.js"]
+CMD ["npm", "install"]
