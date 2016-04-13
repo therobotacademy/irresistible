@@ -262,7 +262,8 @@ paths:
                 type: string
         '404':
           description: Topping not found
-          application/json: { message: No topping with that ID found }
+          examples:
+            application/json: { message: No topping with that ID found }
           schema:
             type: object
             properties:
@@ -305,6 +306,12 @@ paths:
                   type: string
     delete:
       description: Deletes an individual topping
+      parameters:
+        - description: ID for the topping
+          in: path
+          name: toppingid
+          required: true
+          type: string
       responses:
         '204':
           description: Topping deleted
@@ -317,4 +324,3 @@ paths:
               properties:
                 message:
                   type: string
-
