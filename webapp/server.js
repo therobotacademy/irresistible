@@ -31,7 +31,7 @@ app.get('/api/v1.0/toppings/:id', function(req, res) {
 app.put('/api/v1.0/toppings/:id', function(req, res) {
   if(!req.body.hasOwnProperty('title')) {
     res.statusCode = 400;
-    return res.send('Error 400: Post syntax incorrect.');
+    return res.send('Error 400: PUT syntax incorrect.');
   }
 
   toppings.toppings[req.params.id -1] = {
