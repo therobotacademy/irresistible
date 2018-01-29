@@ -1,4 +1,4 @@
-FROM ubuntu:15.04
+FROM ubuntu
 
 ADD ./webapp /opt/webapp
 WORKDIR /opt/webapp
