@@ -1,3 +1,23 @@
+Run instruction
+===============
+git clone https://github.com/therobotacademy/irresistible Irresistible_API   # Fork of https://github.com/synedra/irresistible
+cd Irresistible_API/webapp
+npm install express
+node webapp/server.js
+
+#### Go to             http://localhost:8080
+#### Check the API:    http://localhost:8080/api/v1.0/toppings
+
+Docker
+======
+docker run -p 80:3000 synedra/irresistible
+
+#### Access in a separate image: $ docker exec -it <container ID or name> bash
+docker run -i -t synedra/irresistible /bin/bash  # Access to bash
+
+
+
+--------------------------------------------------------------------
 Docker Demo Repository
 ==========================
 
@@ -48,4 +68,3 @@ Apache 2.0
 ## Copyright
 
 Copyright Kirsten Hunter <synedra@gmail.com>
-
