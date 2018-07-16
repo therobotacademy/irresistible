@@ -2,9 +2,9 @@ Run instruction
 ===============
 git clone https://github.com/therobotacademy/irresistible Irresistible_API   # Fork of https://github.com/synedra/irresistible
 
-cd Irresistible_API
-npm install express
-node webapp/server.js
+$ cd Irresistible_API
+$ npm install express
+$ node webapp/server.js
 
 #### Go to             http://localhost:8080
 #### Check the API:    http://localhost:8080/api/v1.0/toppings
