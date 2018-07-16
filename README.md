@@ -1,7 +1,8 @@
 Run instruction
 ===============
 git clone https://github.com/therobotacademy/irresistible Irresistible_API   # Fork of https://github.com/synedra/irresistible
-cd Irresistible_API/webapp
+
+cd Irresistible_API
 npm install express
 node webapp/server.js
 
