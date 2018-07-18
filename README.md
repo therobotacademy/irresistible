@@ -6,7 +6,8 @@ $ cd Irresistible_API
 $ npm install express
 $ node webapp/server.js
 
-#### Go to             http://localhost:8080
+#### Go to (book ad)   http://localhost:8080
+#### Go to (front end) http://localhost:8080/demo/
 #### Check the API:    http://localhost:8080/api/v1.0/toppings
 
 Docker
